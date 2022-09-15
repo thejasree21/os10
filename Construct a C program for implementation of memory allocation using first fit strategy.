@@ -1,0 +1,77 @@
+C
+1
+#include<stdio.h>
+2
+void main()
+3
+{
+4
+    int bsize[10], psize[10], bno, pno, flags[10], allocation[10], i, j;
+5
+    for(i = 0; i < 10; i++)
+6
+    {
+7
+        flags[i] = 0;
+8
+        allocation[i] = -1;
+9
+    }
+10
+    printf("Enter no. of blocks: ");
+11
+    scanf("%d", &bno);
+12
+    printf("\nEnter size of each block: ");
+13
+    for(i = 0; i < bno; i++)
+14
+        scanf("%d", &bsize[i]);
+15
+    printf("\nEnter no. of processes: ");
+16
+    scanf("%d", &pno);
+17
+    printf("\nEnter size of each process: ");
+18
+    for(i = 0; i < pno; i++)
+19
+        scanf("%d", &psize[i]);
+20
+    for(i = 0; i < pno; i++)         //allocation as per first fit
+21
+        for(j = 0; j < bno; j++)
+22
+            if(flags[j] == 0 && bsize[j] >= psize[i])
+23
+            {
+24
+                allocation[j] = i;
+25
+                flags[j] = 1;
+26
+                break;
+27
+            }
+28
+    //display allocation details
+29
+    printf("\nBlock no.\tsize\t\tprocess no.\t\tsize");
+30
+    for(i = 0; i < bno; i++)
+31
+    {
+32
+        printf("\n%d\t\t%d\t\t", i+1, bsize[i]);
+33
+        if(flags[i] == 1)
+34
+            printf("%d\t\t\t%d",allocation[i]+1,psize[allocation[i]]);
+35
+        else
+36
+            printf("Not allocated");
+37
+    }
+38
+}
